@@ -1,0 +1,16 @@
+﻿@model List<ECommerceProject.Entities.Category>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@foreach (var cat in Model)
+{
+    <h3>Id: @cat.Id</h3>
+
+    <h3>Category Name: @cat.Name</h3>
+
+    <h3>Description: @cat.Description</h3>
+}
+
