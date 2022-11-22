@@ -3,14 +3,21 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Categories</h2>
 
-@foreach (var cat in Model)
-{
-    <h3>Id: @cat.Id</h3>
+<table border="1">
+    <tr>
+        <th>Category</th>
+        <th>Description</th>
+    </tr>
+    @foreach (var cat in Model)
+    {
+        <tr>
+            <td>@cat.Name</td>
+            <td>@cat.Description</td>
+        </tr>
+    }
 
-    <h3>Category Name: @cat.Name</h3>
+</table>
 
-    <h3>Description: @cat.Description</h3>
-}
 
