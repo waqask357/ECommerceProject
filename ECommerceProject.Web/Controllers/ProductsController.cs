@@ -1,4 +1,6 @@
-﻿using ECommerceProject.Services;
+﻿using ECommerceProject.Entities;
+using ECommerceProject.Services;
+using ECommerceProject.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,18 +11,34 @@ namespace ECommerceProject.Web.Controllers
 {
     public class ProductsController : Controller
     {
+        CategoryService categoryService = new CategoryService();
+        ProductService productService = new ProductService();
         // GET: Products
         public ActionResult Index()
         {
             return View();
         }
-
+        [HttpGet]
         public ActionResult Create()
         {
-            CategoryService categoryService = new CategoryService();
             var categoriesList = categoryService.getCategories();
 
             return View(categoriesList);
+        }
+
+        public ActionResult Create(NewProductViewModels model)
+        {
+            Product product = new Product();
+            product.Name = model.Name;
+            product.Description = model.Description;
+            product.Price = model.Price;
+
+            product.Category = categoryService.getCategoryById(model.CategoryId);
+            productService.SaveProduct(product);
+
+
+
+            return View();
         }
     }
 }

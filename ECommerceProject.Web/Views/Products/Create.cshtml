@@ -6,7 +6,7 @@
 <h2>Create Product</h2>
 
 <form id="createProduct">
-    <select name="cars" id="cars">
+    <select name="CategoryId">
         @foreach (var category in Model)
         {
             <option value="@category.Id">@category.Name</option>
@@ -17,15 +17,17 @@
     <label>Description</label>
     <input type="text" name="Description" />
     <label>Price</label>
-    <input type="text" name="Price" />
+    <input type="number" name="Price" />
     <input type="button" value="Save" id="saveBtn" />
 </form>
 
 <script>
     $("#saveBtn").click(function () {
+
+        //jQuery ajax call
         $.ajax({
             type: 'POST',
-            url: '/Product/Create',
+            url: '/Products/Create',
             data: $('#createProduct').serialize()
         })
             .done(function (response) {
