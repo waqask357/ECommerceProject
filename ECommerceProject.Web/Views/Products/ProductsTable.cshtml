@@ -1,0 +1,51 @@
+﻿@model List<ECommerceProject.Entities.Product>
+@{
+    ViewBag.Title = "ProductsTable";
+    Layout = null;
+}
+<br />
+<button type="button" id="newBtn">New</button>
+<br />
+
+<div>
+    <table border="1">
+        <thead>
+            <tr>
+                <td>Product Name</td>
+                <td>Category</td>
+                <td>Price</td>
+                <td>Actions</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Category.Name</td>
+                    <td>@product.Price</td>
+                    <td>
+                        <button class="editBtn" data-id="@product.Id">Edit</button>
+                        <button class="deleteBtn" data-id="@product.Id">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $("#newBtn").click(function () {
+
+        $.ajax({
+            url: '/Products/Create'
+        })
+            .done(function (response) {
+                $("#actionContainer").html(response);
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Failed");
+            });
+    });
+</script>
+

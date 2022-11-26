@@ -1,6 +1,7 @@
 ﻿@model List<ECommerceProject.Entities.Category>
 @{
     ViewBag.Title = "Create";
+    Layout = null;
 }
 
 <h2>Create Product</h2>
@@ -31,7 +32,7 @@
             data: $('#createProduct').serialize()
         })
             .done(function (response) {
-                $("#tablContainer").html(response);
+                $("#tableContainer").html(response);
                 $("#actionContainer").html("");
             })
             .fail(function (XMLHttpRequest, textStatus, errorThrown) {

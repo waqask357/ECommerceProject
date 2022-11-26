@@ -36,9 +36,14 @@ namespace ECommerceProject.Web.Controllers
             product.Category = categoryService.getCategoryById(model.CategoryId);
             productService.SaveProduct(product);
 
+            return RedirectToAction("ProductsTable");
+        }
+        [HttpGet]
+        public ActionResult ProductsTable()
+        {
+            var products = productService.getProducts();
 
-
-            return View();
+            return PartialView(products);
         }
     }
 }

@@ -22,5 +22,13 @@ namespace ECommerceProject.Services
                 context.SaveChanges();
             }
         }
+
+        public List<Product> getProducts()
+        {
+            using (AppDatabaseContext context = new AppDatabaseContext())
+            {
+                return context.Products.Include(x => x.Category).ToList();
+            }
+        }
     }
 }
