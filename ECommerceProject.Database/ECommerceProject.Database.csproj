@@ -60,6 +60,10 @@
     <Compile Include="Migrations\202211301315033_addClmInCat.designer.cs">
       <DependentUpon>202211301315033_addClmInCat.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212011300137_addiURL.cs" />
+    <Compile Include="Migrations\202212011300137_addiURL.designer.cs">
+      <DependentUpon>202212011300137_addiURL.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -79,6 +83,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202211301315033_addClmInCat.resx">
       <DependentUpon>202211301315033_addClmInCat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212011300137_addiURL.resx">
+      <DependentUpon>202212011300137_addiURL.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

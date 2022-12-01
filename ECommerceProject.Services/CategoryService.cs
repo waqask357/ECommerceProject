@@ -33,10 +33,19 @@ namespace ECommerceProject.Services
                 return context.Categories.ToList();
             }
         }
+        public List<Category> GetFeaturedCategories()
+        {
+            using (AppDatabaseContext context = new AppDatabaseContext())
+            {
+                return context.Categories
+                    .Where(x => x.IsFeatured == true && x.ImageURL != null)
+                    .Take(4).ToList();
+            }
+        }
 
         public void updateCategory(Category category)
         {
-            using (AppDatabaseContext context=new AppDatabaseContext())
+            using (AppDatabaseContext context = new AppDatabaseContext())
             {
                 context.Entry(category).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();

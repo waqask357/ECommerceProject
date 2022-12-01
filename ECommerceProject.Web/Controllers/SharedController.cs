@@ -29,7 +29,14 @@ namespace ECommerceProject.Web.Controllers
                 var path = Path.Combine(Server.MapPath("~/Content/WebsiteImages"), filename);
                 file.SaveAs(path);
                 //result.Data = new { Success = true, ImageURL = path };
-                result.Data = new { Success = true, ImageURL = string.Format("/Content/WebsiteImages/{0}", filename) };
+
+                result.Data = new
+                {
+                    Success = true,
+                    ImageURL = "/Content/WebsiteImages/" + filename
+                };
+
+
                 //var newimage = new image() { name = filename };
 
                 //if (Imageserver.Instance.SaveNewImage(newimage))

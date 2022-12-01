@@ -10,5 +10,6 @@ namespace ECommerceProject.Entities
     {
         public List<Product> Products { get; set; }
         public bool IsFeatured { get; set; }
+        public string ImageURL { get; set; }
     }
 }
