@@ -56,6 +56,10 @@
     <Compile Include="Migrations\202211111342143_initial.designer.cs">
       <DependentUpon>202211111342143_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202211301315033_addClmInCat.cs" />
+    <Compile Include="Migrations\202211301315033_addClmInCat.designer.cs">
+      <DependentUpon>202211301315033_addClmInCat.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -72,6 +76,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202211111342143_initial.resx">
       <DependentUpon>202211111342143_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211301315033_addClmInCat.resx">
+      <DependentUpon>202211301315033_addClmInCat.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

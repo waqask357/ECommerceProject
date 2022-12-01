@@ -9,5 +9,6 @@ namespace ECommerceProject.Entities
     public class Category : BaseEntities
     {
         public List<Product> Products { get; set; }
+        public bool IsFeatured { get; set; }
     }
 }

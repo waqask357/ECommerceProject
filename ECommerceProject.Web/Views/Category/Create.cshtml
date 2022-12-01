@@ -10,5 +10,47 @@
     <input type="text" name="Name" />
     <label>Description</label>
     <input type="text" name="Description" />
-    <input type="submit" value="Save"/>
+    <br />
+    <label>Active Category:  </label>
+    <input name="IsFeatured" type="radio" value="true" />True
+    <input name="IsFeatured" type="radio" value="false" />False
+    <br />
+    <input type="file" accept=".png, .jpg" id="imageUpload" />
+    <br />
+    <button type="submit">Save</button>
 </form>
+
+<script>
+    $("#imageUpload").change(function () {
+
+        debugger;
+        var element = this;
+        var formData = new FormData();
+
+        var totalFiles = element.files.length;
+
+        for (var i = 0; i < totalFiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file)
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/Shared/UploadImage',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false
+        })
+            .done(function (response) {
+                if (response.Success == true) {
+                    $("#ImageURL").val(response.ImageURL);
+                    $("#categoryImage").attr("src", response.ImageURL);
+                }
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Failed");
+            });
+
+    });
+</script>
