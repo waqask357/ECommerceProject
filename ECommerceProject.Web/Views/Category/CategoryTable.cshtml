@@ -1,0 +1,74 @@
+﻿@model List<Category>
+@{
+    ViewBag.Title = "CategoryTable";
+}
+<div class="row">
+    <div class="col-md-8">
+        <div class="form-group">
+            <label>Search</label>
+            <input type="text" class="form-control" placeholder="Search">
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Action</label>
+            <div class="row">
+                <div class="col-md-4 pr-0">
+                    <button class="btn btn-primary">Search</button>
+                </div>
+                <div class="col-md-4 pr-0">
+                    <button class="btn btn-primary">Reset</button>
+                </div>
+                <div class="col-md-4 pr-0">
+                    <button class="btn btn-primary" id="newBtn">New</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td>Category Name</td>
+                <td>Description</td>
+                <td>Is Featured</td>
+                <td class="wrap-td">Actions</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Model)
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    <td>@category.Description</td>
+                    <td>@category.IsFeatured</td>
+                    <td>
+                        <button class="editBtn" data-id="@category.Id">Edit</button>
+                        <button class="deleteBtn" data-id="@category.Id">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $("#newBtn").click(function () {
+
+        $.ajax({
+            url: '/Category/Create'
+        })
+            .done(function (response) {
+                debugger;
+                $("#actionContainer").html(response);
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Failed");
+            });
+    });
+</script>
+

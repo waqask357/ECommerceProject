@@ -529,6 +529,7 @@
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\ProductsTable.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Category\CategoryTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

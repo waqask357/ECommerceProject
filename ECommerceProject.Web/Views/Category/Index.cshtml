@@ -1,23 +1,26 @@
-﻿@model List<ECommerceProject.Entities.Category>
+﻿
 @{
     ViewBag.Title = "Index";
 }
+<section class="flat-row flat-icon-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-section">
+                    <h2 class="title">
+                        Categories
+                    </h2>
+                </div><!-- /.title-section -->
+            </div><!-- /.col-md-12 -->
+        </div>
+        <div id="tableContainer">
+            @{
+                Html.RenderAction("CategoryTable");
+            }
+        </div>
 
-<h2>Categories</h2>
-
-<table border="1">
-    <tr>
-        <th>Category</th>
-        <th>Description</th>
-    </tr>
-    @foreach (var cat in Model)
-    {
-        <tr>
-            <td>@cat.Name</td>
-            <td>@cat.Description</td>
-        </tr>
-    }
-
-</table>
-
-
+        <div id="actionContainer">
+          
+        </div>
+    </div>
+</section>

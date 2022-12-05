@@ -10,34 +10,40 @@ namespace ECommerceProject.Web.Controllers
 {
     public class CategoryController : Controller
     {
-        CategoryService catService = new CategoryService();
+        CategoryService categoryService = new CategoryService();
         // GET: Category
         public ActionResult Index()
         {
-            var categoriesList = catService.getCategories();
-            return View(categoriesList);
+            return View();
+        }
+        [HttpGet]
+        public ActionResult CategoryTable()
+        {
+            var categories = categoryService.getCategories();
+
+            return PartialView(categories);
         }
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
         [HttpPost]
         public ActionResult Create(Category categoryFromView)
         {
-            catService.saveCategory(categoryFromView);
+            categoryService.saveCategory(categoryFromView);
             return View();
         }
         [HttpGet]
         public ActionResult Edit(int Id)
         {
-            var category = catService.getCategoryById(Id);
+            var category = categoryService.getCategoryById(Id);
             return View(category);
         }
         [HttpPost]
         public ActionResult Edit(Category categoryFromView)
         {
-            catService.updateCategory(categoryFromView);
+            categoryService.updateCategory(categoryFromView);
             return RedirectToAction("Index");
         }
 
