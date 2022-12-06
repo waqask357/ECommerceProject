@@ -65,10 +65,37 @@
             .done(function (response) {
                 debugger;
                 $("#actionContainer").html(response);
+                focusAction();
             })
             .fail(function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("Failed");
             });
     });
+
+    $(".editBtn").click(function () {
+        debugger;
+        var editId = $(this).attr('data-id');
+
+        $.ajax({
+            url: '/Category/Edit',
+            data: {
+                Id: editId
+            }
+        })
+            .done(function (response) {
+
+                $("#actionContainer").html(response);
+
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Failed");
+            });
+    });
+
+    function focusAction() {
+        $('html, body').animate({
+            scrollTop: $("#actionContainer").offset().top - 100
+        }, 1000);
+    }
 </script>
 

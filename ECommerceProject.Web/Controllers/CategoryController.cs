@@ -1,5 +1,6 @@
 ﻿using ECommerceProject.Entities;
 using ECommerceProject.Services;
+using ECommerceProject.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,16 +30,29 @@ namespace ECommerceProject.Web.Controllers
             return PartialView();
         }
         [HttpPost]
-        public ActionResult Create(Category categoryFromView)
+        public ActionResult Create(NewCategoryViewModel model)
         {
-            categoryService.saveCategory(categoryFromView);
-            return View();
+            Category category = new Category();
+            category.Name = model.Name;
+            category.Description = model.Description;
+            category.ImageURL = model.ImageURL;
+            category.IsFeatured = model.isFeatured;
+
+            categoryService.saveCategory(category);
+            return RedirectToAction("CategoryTable");
         }
         [HttpGet]
         public ActionResult Edit(int Id)
         {
-            var category = categoryService.getCategoryById(Id);
-            return View(category);
+            Category category = categoryService.getCategoryById(Id);
+
+            EditCategoryViewModel model = new EditCategoryViewModel();
+            model.Id = category.Id;
+            model.Name = category.Name;
+            model.Description = category.Description;
+            model.ImageURL = category.ImageURL;
+            model.IsFeatured = category.IsFeatured;
+            return PartialView(model);
         }
         [HttpPost]
         public ActionResult Edit(Category categoryFromView)
