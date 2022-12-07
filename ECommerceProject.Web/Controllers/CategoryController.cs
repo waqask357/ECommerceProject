@@ -18,11 +18,21 @@ namespace ECommerceProject.Web.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult CategoryTable()
+        public ActionResult CategoryTable(string searchCategory)
         {
-            var categories = categoryService.getCategories();
+            CategorySearchViewModel model = new CategorySearchViewModel();
+            
+            model.Categories = categoryService.getCategories();
 
-            return PartialView(categories);
+            if (!string.IsNullOrEmpty(searchCategory))
+            {
+                model.SearchTerm = searchCategory.ToLower();
+                model.Categories=model.Categories
+                    .Where(category=>category.Name.ToLower() == model.SearchTerm.ToLower()).ToList();
+            }
+         
+
+            return PartialView(model);
         }
         [HttpGet]
         public ActionResult Create()
@@ -55,9 +65,17 @@ namespace ECommerceProject.Web.Controllers
             return PartialView(model);
         }
         [HttpPost]
-        public ActionResult Edit(Category categoryFromView)
+        public ActionResult Edit(EditCategoryViewModel model)
         {
-            categoryService.updateCategory(categoryFromView);
+            Category category = new Category();
+
+            category.Id = model.Id;
+            category.Name = model.Name;
+            category.Description = model.Description;
+            category.ImageURL = model.ImageURL;
+            category.IsFeatured = model.IsFeatured;
+
+            categoryService.updateCategory(category);
             return RedirectToAction("Index");
         }
 

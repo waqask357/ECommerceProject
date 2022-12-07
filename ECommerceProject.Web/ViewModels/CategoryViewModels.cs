@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ECommerceProject.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,5 +20,10 @@ namespace ECommerceProject.Web.ViewModels
         public string Description { get; set; }
         public string ImageURL { get; set; }
         public bool IsFeatured { get; set; }
+    }
+    public class CategorySearchViewModel
+    {
+        public List<Category> Categories { get; set; }
+        public string SearchTerm { get; set; }
     }
 }

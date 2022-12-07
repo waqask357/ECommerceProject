@@ -1,16 +1,113 @@
 ﻿@model EditCategoryViewModel
 @{
     ViewBag.Title = "Edit";
+    var trueChecked = "";
+    var falseChecked = "";
+    if (Model.IsFeatured == true)
+    {
+        trueChecked = "Checked";
+    }
+    else if (Model.IsFeatured == false)
+    {
+        falseChecked = "Checked";
+    }
+
+    var imageURL = string.Empty;
+    if (string.IsNullOrEmpty(Model.ImageURL))
+    {
+        imageURL = "/Content/images/placeholderImage.jpg";
+    }
+    else
+    {
+        imageURL = Model.ImageURL;
+    }
+
 }
 
 <h2>Edit Category</h2>
 
-<form method="post">
+<form id="editCategory">
     <input type="text" name="Id" value="@Model.Id" hidden="hidden" />
+    <div class="form-group">
+        <label>Category Name</label>
+        <input name="Name" class="form-control" value="@Model.Name" />
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input name="Description" class="form-control" value="@Model.Description" />
+    </div>
 
-    <label>Category Name</label>
-    <input type="text" name="Name" value="@Model.Name" />
-    <label>Description</label>
-    <input type="text" name="Description" value="@Model.Description" />
-    <input type="submit" value="Update" />
+
+    <div class="form-group">
+        <label>Select Image</label>
+        <input name="ImageURL" type="hidden" id="ImageURL" />
+        <input type="file" class="form-control" accept=".png, .jpg" id="imageUpload" />
+        <img id="categoryImage" src="@imageURL" style="height:100px" />
+    </div>
+
+    <div class="form-group">
+        <label>Is Featured</label>
+        <div class="input-group">
+            <div class="radio form-control">
+                <label><input name="IsFeatured" type="radio" value="true" @trueChecked />True</label>
+            </div>
+            <div class="radio form-control">
+                <label><input name="IsFeatured" type="radio" value="false" @falseChecked />False</label>
+            </div>
+        </div>
+    </div>
+
+    <button id="updateBtn">Update</button>
 </form>
+<script>
+
+    $("#saveBtn").click(function () {
+        $.ajax({
+            type: 'POST',
+            url: '/Category/Edit',
+            data: $('#editCategory').serialize()
+        })
+            .done(function (response) {
+                $("#tableContainer").html(response);
+                $("#actionContainer").html("");
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+            });
+    });
+
+    $("#imageUpload").change(function () {
+
+        var element = this;
+        var formData = new FormData();
+
+        var totalFiles = element.files.length;
+
+        for (var i = 0; i < totalFiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file)
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/Shared/UploadImage',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false
+        })
+            .done(function (response) {
+
+
+                if (response.Success == true) {
+                    $("#ImageURL").val(response.ImageURL);
+                    debugger;
+                    $("#categoryImage").attr("src", response.ImageURL);
+                }
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Failed");
+            });
+
+    });
+</script>
