@@ -110,6 +110,38 @@
             });
     });
 
+    $(".deleteBtn").click(function () {
+
+        swal({
+            title: "Confirm?",
+            text: "Are You Sure Want to Delete This Category?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                debugger;
+                if (willDelete) {
+                    debugger;
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Category/Delete',
+                        data: {
+                            CategoryId: $(this).attr("data-id")
+                        }
+                    })
+                        .done(function (response) {
+                            $("#tableContainer").html(response)
+                            swal("Category deleted Successfully!", {
+                                icon: "success",
+                            });
+                        })
+                        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert("Failed");
+                        });
+                }
+            });
+    });
     function focusAction() {
         $('html, body').animate({
             scrollTop: $("#actionContainer").offset().top - 100

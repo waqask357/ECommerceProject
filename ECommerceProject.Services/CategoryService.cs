@@ -51,5 +51,15 @@ namespace ECommerceProject.Services
                 context.SaveChanges();
             }
         }
+
+        public void deleteCategory(int categoryId)
+        {
+            using (AppDatabaseContext context = new AppDatabaseContext())
+            {
+                var category = context.Categories.Find(categoryId);
+                context.Categories.Remove(category);
+                context.SaveChanges();
+            }
+        }
     }
 }

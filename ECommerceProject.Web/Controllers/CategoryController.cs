@@ -78,6 +78,11 @@ namespace ECommerceProject.Web.Controllers
             categoryService.updateCategory(category);
             return RedirectToAction("Index");
         }
-
+        [HttpPost]
+        public ActionResult Delete(int CategoryId)
+        {
+            categoryService.deleteCategory(CategoryId);
+            return RedirectToAction("CategoryTable");
+        }
     }
 }
