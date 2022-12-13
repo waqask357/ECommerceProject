@@ -30,5 +30,12 @@ namespace ECommerceProject.Services
                 return context.Products.Include(x => x.Category).ToList();
             }
         }
+        public List<Product> getProducts(List<int> productIds)
+        {
+            using (AppDatabaseContext context = new AppDatabaseContext())
+            {
+                return context.Products.Where(product => productIds.Contains(product.Id)).ToList();
+            }
+        }
     }
 }

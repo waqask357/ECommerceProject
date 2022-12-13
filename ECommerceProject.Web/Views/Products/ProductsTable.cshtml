@@ -8,7 +8,7 @@
 <br />
 
 <div>
-    <table border="1">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <td>Product Name</td>
@@ -27,6 +27,7 @@
                     <td>
                         <button class="editBtn" data-id="@product.Id">Edit</button>
                         <button class="deleteBtn" data-id="@product.Id">Delete</button>
+                        <button class="AddtoCart" data-id="@product.Id">Add To Cart</button>
                     </td>
                 </tr>
             }
@@ -46,6 +47,19 @@
             .fail(function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("Failed");
             });
+    });
+
+    //array in javascript
+    var products = [];
+
+    $(".AddtoCart").click(function () {
+        debugger;
+        var ProductId = $(this).attr("data-Id");
+
+        products.push(ProductId);
+
+        $.cookie('CartProduct', products.join("-"), { path: '/' });
+        //alert("Product Added to cart");
     });
 </script>
 
