@@ -34,7 +34,8 @@ namespace ECommerceProject.Services
         {
             using (AppDatabaseContext context = new AppDatabaseContext())
             {
-                return context.Products.Where(product => productIds.Contains(product.Id)).ToList();
+                return context.Products
+                    .Where(product => productIds.Contains(product.Id)).ToList();
             }
         }
     }
