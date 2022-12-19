@@ -60,7 +60,8 @@
     $("#searchBtn").click(function () {
         var searchValue = $("#searchText").val();
         $.ajax({
-            url: '/Category/CategoryTable',
+            url: '@Url.Action("CategoryTable", "Category")', //'/Category/CategoryTable',
+
             data: {
                 searchCategory: searchValue
             }
@@ -78,7 +79,7 @@
     $("#newBtn").click(function () {
 
         $.ajax({
-            url: '/Category/Create'
+            url:'@Url.Action("Create", "Category")' //'/Category/Create'
         })
             .done(function (response) {
                 debugger;

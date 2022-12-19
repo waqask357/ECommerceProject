@@ -4,21 +4,21 @@
 }
 
 <h2>Checkout</h2>
-@if (Model.CartProducts!=null)
+@if (Model.CartProducts != null)
 {
     <div>
         @foreach (var product in Model.CartProducts)
         {
-        var productQuantity = Model.CartproductsIds.Where(pId => pId == product.Id).Count();
+            var productQuantity = Model.CartproductsIds.Where(pId => pId == product.Id).Count();
 
-        <div>
-            Product Name: @product.Name - Price: @product.Price - Quantity: @productQuantity - Amount: @(product.Price * productQuantity)
-        </div>
+            <div>
+                Product Name: @product.Name - Price: @product.Price - Quantity: @productQuantity - Amount: @(product.Price * productQuantity)
+            </div>
         }
     </div>
 
     <div>
-        Total Bill: @Model.CartProducts.Sum(x=>x.Price * Model.CartproductsIds.Where(pId => pId == x.Id).Count())
+        Total Bill: @Model.CartProducts.Sum(x => x.Price * Model.CartproductsIds.Where(pId => pId == x.Id).Count())
     </div>
 
 }
