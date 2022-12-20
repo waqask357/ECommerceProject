@@ -64,6 +64,10 @@
     <Compile Include="Migrations\202212011300137_addiURL.designer.cs">
       <DependentUpon>202212011300137_addiURL.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212201306182_configTable.cs" />
+    <Compile Include="Migrations\202212201306182_configTable.designer.cs">
+      <DependentUpon>202212201306182_configTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -86,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212011300137_addiURL.resx">
       <DependentUpon>202212011300137_addiURL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212201306182_configTable.resx">
+      <DependentUpon>202212201306182_configTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
