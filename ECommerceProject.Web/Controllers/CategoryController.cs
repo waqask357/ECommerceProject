@@ -11,7 +11,7 @@ namespace ECommerceProject.Web.Controllers
 {
     public class CategoryController : Controller
     {
-        CategoryService categoryService = new CategoryService();
+        //CategoryService categoryService = new CategoryService();
         // GET: Category
         public ActionResult Index()
         {
@@ -22,7 +22,7 @@ namespace ECommerceProject.Web.Controllers
         {
             CategorySearchViewModel model = new CategorySearchViewModel();
             
-            model.Categories = categoryService.getCategories();
+            model.Categories = CategoryService.Instance.getCategories();
 
             if (!string.IsNullOrEmpty(searchCategory))
             {
@@ -48,13 +48,13 @@ namespace ECommerceProject.Web.Controllers
             category.ImageURL = model.ImageURL;
             category.IsFeatured = model.isFeatured;
 
-            categoryService.saveCategory(category);
+            CategoryService.Instance.saveCategory(category);
             return RedirectToAction("CategoryTable");
         }
         [HttpGet]
         public ActionResult Edit(int Id)
         {
-            Category category = categoryService.getCategoryById(Id);
+            Category category = CategoryService.Instance.getCategoryById(Id);
 
             EditCategoryViewModel model = new EditCategoryViewModel();
             model.Id = category.Id;
@@ -75,13 +75,13 @@ namespace ECommerceProject.Web.Controllers
             category.ImageURL = model.ImageURL;
             category.IsFeatured = model.IsFeatured;
 
-            categoryService.updateCategory(category);
+            CategoryService.Instance.updateCategory(category);
             return RedirectToAction("Index");
         }
         [HttpPost]
         public ActionResult Delete(int CategoryId)
         {
-            categoryService.deleteCategory(CategoryId);
+            CategoryService.Instance.deleteCategory(CategoryId);
             return RedirectToAction("CategoryTable");
         }
     }

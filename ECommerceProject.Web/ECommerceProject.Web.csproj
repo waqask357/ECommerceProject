@@ -182,7 +182,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="ViewModels\CategoryViewModels.cs" />
-    <Compile Include="ViewModels\NewProductViewModels.cs" />
+    <Compile Include="ViewModels\ProductViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
@@ -535,6 +535,7 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Category\CategoryTable.cshtml" />
     <Content Include="Views\Shop\Checkout.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -58,6 +58,7 @@
     </div>
 
     <button id="updateBtn">Update</button>
+    <button id="cancelBtn">Cancel</button>
 </form>
 <script>
 
@@ -75,7 +76,10 @@
                 alert(errorThrown);
             });
     });
-
+    $("#cancelBtn").click(function () {
+        $("#actionContainer").html("");
+        focusAction("tableContainer");
+    });
     $("#imageUpload").change(function () {
 
         var element = this;

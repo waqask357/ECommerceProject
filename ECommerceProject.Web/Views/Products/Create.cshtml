@@ -1,4 +1,4 @@
-﻿@model List<ECommerceProject.Entities.Category>
+﻿@model NewProductViewModel
 @{
     ViewBag.Title = "Create";
     Layout = null;
@@ -8,7 +8,7 @@
 
 <form id="createProduct">
     <select name="CategoryId">
-        @foreach (var category in Model)
+        @foreach (var category in Model.AvailableCategories)
         {
             <option value="@category.Id">@category.Name</option>
         }
@@ -20,7 +20,9 @@
     <label>Price</label>
     <input type="number" name="Price" />
     <input type="button" value="Save" id="saveBtn" />
+    <input type="button" value="Cancel" id="cancelBtn" />
 </form>
+
 
 <script>
     $("#saveBtn").click(function () {
@@ -28,18 +30,21 @@
         //jQuery ajax call
         $.ajax({
             type: 'POST',
-            url: '/Products/Create',
+            url: '@Url.Action("Create", "Products")', //'/Products/Create',
             data: $('#createProduct').serialize()
         })
             .done(function (response) {
                 $("#tableContainer").html(response);
                 $("#actionContainer").html("");
+                focusAction("tableContainer");
             })
             .fail(function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("Failed");
             });
     });
 
-
-
+    $("#cancelBtn").click(function () {
+                $("#actionContainer").html("");
+                focusAction("tableContainer");
+    });
 </script>

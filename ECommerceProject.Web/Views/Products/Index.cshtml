@@ -2,15 +2,34 @@
 @{
     ViewBag.Title = "Index";
 }
+<section class="flat-row flat-icon-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-section">
+                    <h2 class="title">
+                        Products
+                    </h2>
+                </div><!-- /.title-section -->
+            </div><!-- /.col-md-12 -->
+        </div>
+        <div id="tableContainer">
+            @{
+                Html.RenderAction("ProductsTable");
+            }
 
-<div id="tableContainer">
-    @{
-        Html.RenderAction("ProductsTable");
+        </div>
+        <hr />
+        <div id="actionContainer">
+
+        </div>
+    </div>
+</section>
+<script>
+    function focusAction(controlToFocus) {
+        debugger;
+        $('html, body').animate({
+            scrollTop: $("#" + controlToFocus).offset().top - 100
+        }, 1000);
     }
-
-</div>
-<hr />
-<div id="actionContainer">
-
-</div>
-
+</script>

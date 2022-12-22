@@ -33,10 +33,10 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <td>Category Name</td>
-                <td>Description</td>
-                <td>Is Featured</td>
-                <td class="wrap-td">Actions</td>
+                <td class="font-weight-bold">Category Name</td>
+                <td class="font-weight-bold">Description</td>
+                <td class="font-weight-bold">Is Featured</td>
+                <td class="wrap-td font-weight-bold">Actions</td>
             </tr>
         </thead>
         <tbody>
@@ -84,7 +84,7 @@
             .done(function (response) {
                 debugger;
                 $("#actionContainer").html(response);
-                focusAction();
+                focusAction("actionContainer");
             })
             .fail(function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("Failed");
@@ -104,7 +104,7 @@
             .done(function (response) {
 
                 $("#actionContainer").html(response);
-                focusAction();
+                focusAction("actionContainer");
             })
             .fail(function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("Failed");
@@ -143,10 +143,6 @@
                 }
             });
     });
-    function focusAction() {
-        $('html, body').animate({
-            scrollTop: $("#actionContainer").offset().top - 100
-        }, 1000);
-    }
+   
 </script>
 
