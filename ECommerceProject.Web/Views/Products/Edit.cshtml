@@ -1,36 +1,55 @@
 ﻿@model EditProductViewModel
 @{
     ViewBag.Title = "Edit";
+
+    var imageURL = !string.IsNullOrEmpty(Model.ImageURL) ? Model.ImageURL : "/Content/images/placeholderImage.jpg";
 }
 
 <h2>Edit Product</h2>
 <form id="editProduct">
     <input name="Id" id="txtId" value="@Model.Id" hidden="hidden" />
-    <div class="form-group">
-        <label>Category</label>
-        <select name="CategoryId" class="form-control">
-            @foreach (var category in Model.AvailableCategories)
-            {
-                var selected = category.Id == Model.CategoryId ? "selected" : string.Empty;
-                <option value="@category.Id" @selected>@category.Name</option>
-            }
-        </select>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Category</label>
+                <select name="CategoryId" class="form-control">
+                    @foreach (var category in Model.AvailableCategories)
+                    {
+                        var selected = category.Id == Model.CategoryId ? "selected" : string.Empty;
+                        <option value="@category.Id" @selected>@category.Name</option>
+                    }
+                </select>
 
+            </div>
+            <div class="form-group">
+                <label>Name</label>
+                <input name="Name" id="txtName" value="@Model.Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input name="Description" id="txtDescription" value="@Model.Description" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Price</label>
+                <input name="Price" id="txtPrice" value="@Model.Price" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Select Image</label>
+                <input type="hidden" name="ImageURL" id="ImageURL" />
+                <input class="form-control" type="file" accept=".png, .jpg" id="imageUpload" style="height:100px" />
+                <div class="thumb">
+                    <img id="categoryImage" />
+                </div>
+            </div>
+            <button type="button" id="updateBtn">Update</button>
+            <button type="button" id="cancelBtn">Cancel</button>
+        </div>
+        <div class="col-md-4">
+            <div class="thumb">
+                <img id="productImage" class="img-thumbnail img-fluid" src="@imageURL" />
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label>Name</label>
-        <input name="Name" id="txtName" value="@Model.Name" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Description</label>
-        <input name="Description" id="txtDescription" value="@Model.Description" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Price</label>
-        <input name="Price" id="txtPrice" value="@Model.Price" class="form-control" />
-    </div>
-    <button type="button" id="updateBtn">Update</button>
-    <button type="button" id="cancelBtn">Cancel</button>
 </form>
 
 <script>
@@ -59,7 +78,36 @@
                 alert("Failed");
             });
     });
+    $("#imageUpload").change(function () {
 
+        var element = this;
+        var formData = new FormData();
+
+        var totalFiles = element.files.length;
+        for (var i = 0; i < totalFiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file)
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("UploadImage", "Shared")', //'/Shared/UploadImage',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false
+        })
+            .done(function (response) {
+                if (response.Success == true) {
+                    $("#ImageURL").val(response.ImageURL);
+                    $("#productImage").attr("src", response.ImageURL);
+                }
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Failed");
+            });
+
+    });
     $("#cancelBtn").click(function () {
         $("#actionContainer").html("");
         focusAction("tableContainer");

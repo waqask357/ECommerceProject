@@ -35,6 +35,7 @@ namespace ECommerceProject.Web.Controllers
             product.Name = model.Name;
             product.Description = model.Description;
             product.Price = model.Price;
+            product.ImageURL = model.ImageURL;
 
             product.Category = CategoryService.Instance.getCategoryById(model.CategoryId);
             ProductService.Instance.SaveProduct(product);
@@ -54,6 +55,7 @@ namespace ECommerceProject.Web.Controllers
             model.Description = product.Description;
             model.Price = product.Price;
             model.CategoryId = product.Category.Id;
+            model.ImageURL = product.ImageURL;
             model.AvailableCategories = CategoryService.Instance.getCategories();
 
 
@@ -67,6 +69,7 @@ namespace ECommerceProject.Web.Controllers
             product.Name = model.Name;
             product.Description = model.Description;
             product.Price = model.Price;
+            product.ImageURL = model.ImageURL;
             product.Category = CategoryService.Instance.getCategoryById(model.CategoryId);
 
             ProductService.Instance.UpdateProduct(product);

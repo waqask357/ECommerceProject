@@ -10,5 +10,6 @@ namespace ECommerceProject.Entities
     {
         public double Price { get; set; }
         public Category Category { get; set; }
+        public string ImageURL { get; set; }
     }
 }
